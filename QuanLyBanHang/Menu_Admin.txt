@@ -1,0 +1,6 @@
+***************Menu***************
+1. Xu ly don hang
+2. Quan ly hang hoa
+3. Thoat
+4. Ve Menu Chinh
+***************Menu***************

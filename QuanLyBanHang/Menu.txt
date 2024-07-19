@@ -1,0 +1,7 @@
+***************Menu***************
+1. Xem danh sach hang hoa
+2. Tim kiem thong tin hang hoa
+3. Dat hang
+4. Quan Ly
+5. Thoat
+***************Menu***************
