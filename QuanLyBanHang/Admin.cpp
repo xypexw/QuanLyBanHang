@@ -3,7 +3,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <queue>
 #include <iomanip>
 #include <ctime>
 #include <conio.h>
@@ -19,18 +18,18 @@ Admin::Admin(std::string strID, std::string strPassword)
 Admin::Admin(const Admin& admin)
 {}
 
-//Hàm nhap mat khau mã hóa bang kı tu *
+//HÃ m nhap mat khau mÃ£ hÃ³a bang kÃ½ tu *
 Admin::~Admin() {}
 std::string Admin::getPassword() {
     std::string password;
     char ch;
 
     std::cout << "Enter password (Enter ESC to Exit): ";
-    while ((ch = _getch()) != '\r') { // '\r' là kí tu ket thúc (Enter)
-        if (ch == 8) { // Xu lı kı tu Backspace
+    while ((ch = _getch()) != '\r') { // '\r' lÃ  kÃ­ tu ket thÃºc (Enter)
+        if (ch == 8) { // Xu lÃ½ kÃ½ tu Backspace
             if (!password.empty()) {
                 password.pop_back();
-                std::cout << "\b \b"; // Xóa kı tu cuoi cùng trên màn hình
+                std::cout << "\b \b"; // XÃ³a kÃ½ tu cuoi cÃ¹ng trÃªn mÃ n hÃ¬nh
             }
         }
         else {
@@ -43,13 +42,13 @@ std::string Admin::getPassword() {
     return password;
 }
 
-//Hàm dang nhap admin
+//HÃ m dang nhap admin
 bool Admin::login()
 {
     UI ui;
     bool bCheck = false;
     std::ifstream ifAdminFile;
-    ifAdminFile.open("admin.txt", std::ios::in); //Lay thông tin tu file Admin.txt
+    ifAdminFile.open("admin.txt", std::ios::in); //Lay thÃ´ng tin tu file Admin.txt
     int iCount = 0;
     while (iCount < 3)
     {
@@ -62,7 +61,7 @@ bool Admin::login()
             system("cls");
             ui.renderWelcomeScreen();
         }
-        if (ifAdminFile.is_open()) //Kiem tra thông tin nhap có dúng hay không tu file Admin.txt
+        if (ifAdminFile.is_open()) //Kiem tra thÃ´ng tin nhap cÃ³ dÃºng hay khÃ´ng tu file Admin.txt
         {
             std::string strFileLine;
             while (std::getline(ifAdminFile, strFileLine))
@@ -78,7 +77,7 @@ bool Admin::login()
                 }
             }
         }
-        if (bCheck) //dang nhap thành công tra ve gia tri true
+        if (bCheck) //dang nhap thÃ nh cÃ´ng tra ve gia tri true
         {
             std::cout << "login successfully" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(2000));
@@ -86,19 +85,19 @@ bool Admin::login()
         }
         else
         {
-            std::cout << "ID or password incorrect" << std::endl; //Neu nhap sai so lan se tang lên 1. du 3 lan se quay ve lai trang chu
+            std::cout << "ID or password incorrect" << std::endl; //Neu nhap sai so lan se tang lÃªn 1. du 3 lan se quay ve lai trang chu
             iCount++;
         }
     }
     if(bCheck == false) //Neu nhap sai 3 lan se quay tro ve trang chu
     std::cout << "login falied" << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000)); //Dung màn hình 1 khoang thoi gian
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000)); //Dung mÃ n hÃ¬nh 1 khoang thoi gian
     system("cls");
     ui.renderWelcomeScreen();
     return false;
 }
 
-//Hàm hien thi màn hình chuc nang xu lı don hàng
+//HÃ m hien thi mÃ n hÃ¬nh chuc nang xu lÃ½ don hÃ ng
 void Admin::renderXuLyDonHang()
 {
     UI ui;
@@ -108,7 +107,7 @@ void Admin::renderXuLyDonHang()
     iFileOpen.open("XuLyDonHang.txt", std::ios::in);    //
     alignTextPositionHeight(20);                        //
     textColor(14);                                      //
-    if (iFileOpen.is_open())                            // Hien thi màn hình chuc nang xu lı don hang tu file XyLyDonHang.txt
+    if (iFileOpen.is_open())                            // Hien thi mÃ n hÃ¬nh chuc nang xu lÃ½ don hang tu file XyLyDonHang.txt
     {                                                   //
         textColor(14);                                  //
         std::string strFileLine;                        //
@@ -132,7 +131,7 @@ void Admin::renderXuLyDonHang()
         ui.renderGoodByeScreen();
 }
 
-//Hàm hien thi chuc nang quan lı hàng hóa
+//HÃ m hien thi chuc nang quan lÃ½ hÃ ng hÃ³a
 void Admin::renderQuanLyHangHoa()
 {
     UI ui;                                                  //
@@ -142,7 +141,7 @@ void Admin::renderQuanLyHangHoa()
     iFileOpen.open("QuanLyHangHoa.txt", std::ios::in);      //
     alignTextPositionHeight(20);                            //
     textColor(14);                                          //
-    if (iFileOpen.is_open())                                // Hien thi màn hình chuc nang Quan lı hàng hóa tu file QuanLyHangHoa.txt
+    if (iFileOpen.is_open())                                // Hien thi mÃ n hÃ¬nh chuc nang Quan lÃ½ hÃ ng hÃ³a tu file QuanLyHangHoa.txt
     {                                                       //
         textColor(14);                                      //
         std::string strFileLine;                            //
@@ -166,7 +165,7 @@ void Admin::renderQuanLyHangHoa()
         ui.renderGoodByeScreen();
 }
 
-//Hàm hien thi màn hình menu admin
+//HÃ m hien thi mÃ n hÃ¬nh menu admin
 void Admin::renderMenuAdmin()
 {
     UI ui;                                           //
@@ -176,7 +175,7 @@ void Admin::renderMenuAdmin()
     iFileOpen.open("Menu_Admin.txt", std::ios::in);  //
     alignTextPositionHeight(20);                     //
     textColor(14);                                   //
-    if (iFileOpen.is_open())                         // Hien thi màn hình menu admin tu file Menu_Admin.txt
+    if (iFileOpen.is_open())                         // Hien thi mÃ n hÃ¬nh menu admin tu file Menu_Admin.txt
     {                                                //
         textColor(14);                               //
         std::string strFileLine;                     //
