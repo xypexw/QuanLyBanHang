@@ -11,7 +11,7 @@
 #include "tools.h"
 
 
-//Thiet ke class UI. Khai báo các bien và hàm trong class UI
+
 class UI
 {
 public:
@@ -23,6 +23,7 @@ public:
     //--------------------------------------------------------------
     void renderLoginScreen();       
     void renderMenuScreen();
+    void renderMenuAdmin();
     void renderDatHang();
     void renderTimKiem();
     void renderDSHangHoa();

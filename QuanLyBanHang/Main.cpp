@@ -1,9 +1,9 @@
 #include "UI.h"
 
-//Hàm main duoc chay dau tiên
+//Hï¿½m main duoc chay dau tiï¿½n
 int main()
 {
     UI ui;
-    ui.renderWelcomeScreen(); //Hien thi màn hình trang chu
+    ui.renderWelcomeScreen(); //Hien thi mï¿½n hï¿½nh trang chu
     return 0;
 }

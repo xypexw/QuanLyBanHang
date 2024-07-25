@@ -10,7 +10,6 @@
 #include <ctime>
 #include "tools.h"
 
-//Thiet ke class Admin. Khai báo bien và hàm trong class Admin
 class Admin
 {
 private:
@@ -23,5 +22,4 @@ public:
     std::string getPassword();
     void renderXuLyDonHang();
     void renderQuanLyHangHoa();
-    void renderMenuAdmin();
 };
