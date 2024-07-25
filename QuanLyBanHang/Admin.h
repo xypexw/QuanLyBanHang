@@ -22,4 +22,7 @@ public:
     std::string getPassword();
     void renderXuLyDonHang();
     void renderQuanLyHangHoa();
+    void renderMenuAdmin();
+    void renderTaoHangHoa();
+    void renderXoaHangHoa();
 };

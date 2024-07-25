@@ -98,21 +98,21 @@ bool Admin::login()
 void Admin::renderXuLyDonHang()
 {
     UI ui;
-    system("cls");
-    getDefaultAttribute();
-    std::ifstream iFileOpen;
-    iFileOpen.open("XuLyDonHang.txt", std::ios::in);
-    alignTextPositionHeight(20);
-    textColor(14);
-    if (iFileOpen.is_open())
-    {
-        textColor(14);
-        std::string strFileLine;
-        while (getline(iFileOpen, strFileLine))
-        {
-            alignTextPositionWidth(strFileLine, 2);
-            std::cout << strFileLine << std::endl;
-        }
+    system("cls");                                      //
+    getDefaultAttribute();                              //
+    std::ifstream iFileOpen;                            //
+    iFileOpen.open("XuLyDonHang.txt", std::ios::in);    //
+    alignTextPositionHeight(20);                        //
+    textColor(14);                                      //
+    if (iFileOpen.is_open())                            // Hien thi màn hình chuc nang xu lý don hang tu file XyLyDonHang.txt
+    {                                                   //
+        textColor(14);                                  //
+        std::string strFileLine;                        //
+        while (getline(iFileOpen, strFileLine))         //
+        {                                               //
+            alignTextPositionWidth(strFileLine, 2);     //
+            std::cout << strFileLine << std::endl;      //
+        }                                               //
     }
     std::cout << std::endl;
     int iChoice;
@@ -122,75 +122,172 @@ void Admin::renderXuLyDonHang()
     if (iChoice == 1)
     {
         system("cls");
-        ui.renderMenuAdmin();
+        Admin::renderMenuAdmin();
     }
     else if (iChoice == 0)
         ui.renderGoodByeScreen();
 }
 void Admin::renderQuanLyHangHoa()
 {
-    UI ui;
-    while(true){
-        system("cls");
-        getDefaultAttribute();
-        std::ifstream iFileOpen;
-        iFileOpen.open("QuanLyHangHoa.txt", std::ios::in);
-        alignTextPositionHeight(20);
-        textColor(14);
-        if (iFileOpen.is_open())
-        {
-            textColor(14);
-            std::string strFileLine;
-            while (getline(iFileOpen, strFileLine))
-            {
-                alignTextPositionWidth(strFileLine, 2);
-                std::cout << strFileLine << std::endl;
-            }
-        }
-        int choice;
-        std::cin>>choice;
-        if(choice == 1){
-            system("cls");
-            std::string name, origin, color, entryDate;
-            int amount, price;
-            std::cout<<"Ten hang hoa: ";
-            std::cin.ignore();
-            getline(std::cin,name);
-            std::cout << "Noi san xuat: ";
-            getline(std::cin, origin);
-            std::cout << "Mau sac: ";
-            getline(std::cin, color);
-            std::cout << "So luong: ";
-            std::cin >> amount;
-            std::cout << "Ngay nhap kho: ";
-            std::cin.ignore();
-            getline(std::cin, entryDate);
-            std::cout << "Gia: ";
-            std::cin >> price;
-            HangHoa newHangHoa;
-            newHangHoa.taoHangHoa(name, origin, color, price, entryDate, amount);
-            
-        }
-        if(choice == 2){
-            system("cls");
-            string ma;
-            cout<<"Nhap ma hang hoa ban muon xoa: ";
-            cin.ignore();
-            getline(std::cin, ma);
-            HangHoa::xoaHangHoa(ma);
-        }
-        if(choice == 3) break;
-    }
+    UI ui;                                                  //
+    system("cls");                                          //
+    getDefaultAttribute();                                  //
+    std::ifstream iFileOpen;                                //
+    iFileOpen.open("QuanLyHangHoa.txt", std::ios::in);      //
+    alignTextPositionHeight(20);                            //
+    textColor(14);                                          //
+    if (iFileOpen.is_open())                                // Hien thi màn hình chuc nang Quan lý hàng hóa tu file QuanLyHangHoa.txt
+    {                                                       //
+        textColor(14);                                      //
+        std::string strFileLine;                            //
+        while (getline(iFileOpen, strFileLine))             //
+        {                                                   //
+            alignTextPositionWidth(strFileLine, 2);         //
+            std::cout << strFileLine << std::endl;          //
+        }                                                   //
+    }                                                       //
+    std::cout << std::endl;
 
+    std::cout << "Enter your choice: ";
+    int iChoice;
+    std::cin >> iChoice;
+    if (iChoice == 1) {
+        system("cls");
+        Admin::renderTaoHangHoa();
+    }
+    if (iChoice == 2) {
+        system("cls");
+        Admin::renderXoaHangHoa();
+    }
+    if (iChoice == 3)
+        Admin::renderMenuAdmin();
+}
+void Admin::renderMenuAdmin()
+{
+    UI ui;                                           //
+    system("cls");                                   //
+    getDefaultAttribute();                           //
+    std::ifstream iFileOpen;                         //
+    iFileOpen.open("Menu_Admin.txt", std::ios::in);  //
+    alignTextPositionHeight(20);                     //
+    textColor(14);                                   //
+    if (iFileOpen.is_open())                         // Hien thi màn hình menu admin tu file Menu_Admin.txt
+    {                                                //
+        textColor(14);                               //
+        std::string strFileLine;                     //
+        while (getline(iFileOpen, strFileLine))      //
+        {                                            //
+            alignTextPositionWidth(strFileLine, 2);  //
+            std::cout << strFileLine << std::endl;   //
+        }                                            //
+    }                                                //
     std::cout << std::endl;
     int iChoice;
+    std::cout << "Enter your choice: ";
+    std::cin >> iChoice;
+    std::cin.ignore();
+    if (iChoice == 4)
+    {
+        system("cls");
+        ui.renderWelcomeScreen();
+    }
+    else
+        if (iChoice == 3)
+            ui.renderGoodByeScreen();
+        else
+            if (iChoice == 2)
+                Admin::renderQuanLyHangHoa();
+            else
+                if (iChoice == 1)
+                    Admin::renderXuLyDonHang();
+}
+
+void Admin::renderTaoHangHoa()
+{
+    UI ui;
+    system("cls");                                      //
+    getDefaultAttribute();                              //
+    std::ifstream iFileOpen;                            //
+    iFileOpen.open("TaoHangHoa.txt", std::ios::in);    //
+    alignTextPositionHeight(20);                        //
+    textColor(14);                                      //
+    if (iFileOpen.is_open())                            // Hien thi màn hình chuc nang xu lý don hang tu file TaoHangHoa.txt
+    {                                                   //
+        textColor(14);                                  //
+        std::string strFileLine;                        //
+        while (getline(iFileOpen, strFileLine))         //
+        {                                               //
+            alignTextPositionWidth(strFileLine, 2);     //
+            std::cout << strFileLine << std::endl;      //
+        }                                               //
+    }
+    std::cout << std::endl;
+    std::cout << "Xin moi nhap thong tin cua san pham: " << std::endl;
+        std::string name, origin, color, entryDate;
+        int amount, price;
+        std::cout << "Ten hang hoa: ";
+        std::cin.ignore();
+        getline(std::cin, name);
+        std::cout << "Noi san xuat: ";
+        getline(std::cin, origin);
+        std::cout << "Mau sac: ";
+        getline(std::cin, color);
+        std::cout << "So luong: ";
+        std::cin >> amount;
+        std::cout << "Ngay nhap kho: ";
+        std::cin.ignore();
+        getline(std::cin, entryDate);
+        std::cout << "Gia: ";
+        std::cin >> price;
+        HangHoa newHangHoa;
+        newHangHoa.taoHangHoa(name, origin, color, price, entryDate, amount);
+        std::cout << std::endl;
+        int iChoice;
+        std::cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << std::endl;
+        std::cout << "Choise: ";
+        std::cin >> iChoice;
+        if (iChoice == 1)
+        {
+            system("cls");
+            Admin::renderQuanLyHangHoa();
+        }
+        else if (iChoice == 0)
+            ui.renderGoodByeScreen();
+}
+void Admin::renderXoaHangHoa()
+{
+    UI ui;
+    system("cls");                                      //
+    getDefaultAttribute();                              //
+    std::ifstream iFileOpen;                            //
+    iFileOpen.open("XoaHangHoa.txt", std::ios::in);    //
+    alignTextPositionHeight(20);                        //
+    textColor(14);                                      //
+    if (iFileOpen.is_open())                            // Hien thi màn hình chuc nang xu lý don hang tu file XoaHangHoa.txt
+    {                                                   //
+        textColor(14);                                  //
+        std::string strFileLine;                        //
+        while (getline(iFileOpen, strFileLine))         //
+        {                                               //
+            alignTextPositionWidth(strFileLine, 2);     //
+            std::cout << strFileLine << std::endl;      //
+        }                                               //
+    }
+    std::cout << std::endl;
+    int iChoice;
+    string ma;
+    cout << "Nhap ma hang hoa ban muon xoa: ";
+    cin.ignore();
+    getline(std::cin, ma);
+    HangHoa::xoaHangHoa(ma);
+    std::cout << std::endl;
     std::cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << std::endl;
-    std::cout << "Choice: ";
+    std::cout << "Choise: ";
     std::cin >> iChoice;
     if (iChoice == 1)
     {
         system("cls");
-        ui.renderMenuAdmin();
+        Admin::renderMenuAdmin();
     }
     else if (iChoice == 0)
         ui.renderGoodByeScreen();

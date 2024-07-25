@@ -99,8 +99,8 @@ void UI::renderGoodByeScreen()
 	cout << flush;
 	this_thread::sleep_for(chrono::milliseconds(1500));
 	system("cls");
-	alignTextPositionHeight(2.8);
 	ifAsciiTextArt.open("ThanksFor.txt", ios::in);
+	alignTextPositionHeight(2.8);
 	if (ifAsciiTextArt.is_open())
 	{
 		string strFileLine;

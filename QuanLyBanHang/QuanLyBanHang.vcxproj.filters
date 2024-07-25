@@ -33,6 +33,9 @@
     <ClCompile Include="Admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HangHoa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HangHoa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,6 +92,15 @@
       <Filter>GiaoDien</Filter>
     </Text>
     <Text Include="QuanLyHangHoa.txt">
+      <Filter>GiaoDien</Filter>
+    </Text>
+    <Text Include="DanhSachHangHoa.txt">
+      <Filter>ThongTin</Filter>
+    </Text>
+    <Text Include="TaoHangHoa.txt">
+      <Filter>GiaoDien</Filter>
+    </Text>
+    <Text Include="XoaHangHoa.txt">
       <Filter>GiaoDien</Filter>
     </Text>
   </ItemGroup>

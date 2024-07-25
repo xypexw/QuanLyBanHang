@@ -6,7 +6,7 @@
 #include <thread> 
 #include <chrono>
 void HangHoa::saveToFIle(){
-    std::ofstream file("DSHangHoa.txt",std::ios::out);
+    std::ofstream file("DanhSachHangHoa.txt",std::ios::out);
     if(file.is_open()){
         HangHoa* dummy = head;
         while(dummy != NULL){
@@ -36,7 +36,7 @@ void HangHoa::taoHangHoa(string name, string origin, string color, int price, st
         head = newNode;
         if(!deletedIDs.isEmpty()){
             string id = deletedIDs.pop();
-            strncpy(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
+            strncpy_s(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
             newNode->ma[sizeof(newNode->ma) - 1] = '\0';
         }else{
             snprintf(newNode->ma, sizeof(newNode->ma), "%04d", counter++);
@@ -60,7 +60,7 @@ void HangHoa::taoHangHoa(string name, string origin, string color, int price, st
                 tmp->next = newNode;
                 if(!deletedIDs.isEmpty()){
                     string id = deletedIDs.pop();
-                    strncpy(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
+                    strncpy_s(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
                     newNode->ma[sizeof(newNode->ma) - 1] = '\0';
                 }else{
                     snprintf(newNode->ma, sizeof(newNode->ma), "%04d", counter++);
