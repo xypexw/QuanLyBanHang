@@ -91,9 +91,10 @@ void HangHoa::xoaHangHoa(string ma){
        deletedIDs.push(tmp->ma);
        delete tmp;
        HangHoa::saveToFIle();
-    }else{
-        system("cls");
-        cout<<"Khong tim thay hang hoa";
-        this_thread::sleep_for(chrono::seconds(2));
+       cout << "Xoa Hang Hoa Thanh Cong";
+    }
+    else
+    {
+        cout<<"Khong Tim Thay Hang Hoa";
     }
 }

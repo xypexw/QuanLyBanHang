@@ -242,6 +242,7 @@ void Admin::renderTaoHangHoa()
         HangHoa newHangHoa;
         newHangHoa.taoHangHoa(name, origin, color, price, entryDate, amount);
         std::cout << std::endl;
+        std::cout << "Hang Hoa Da Duoc Them Thanh Cong" << std::endl;
         int iChoice;
         std::cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << std::endl;
         std::cout << "Choise: ";
@@ -287,7 +288,7 @@ void Admin::renderXoaHangHoa()
     if (iChoice == 1)
     {
         system("cls");
-        Admin::renderMenuAdmin();
+        Admin::renderQuanLyHangHoa();
     }
     else if (iChoice == 0)
         ui.renderGoodByeScreen();
