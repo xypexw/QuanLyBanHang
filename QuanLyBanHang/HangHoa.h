@@ -18,4 +18,5 @@ public:
         static void saveToFIle();
         void taoHangHoa(string name, string origin, string color, int price, string entryDate, int amount);
         static void xoaHangHoa(string ma);
+        void timkiemhoanghoa();
 };
