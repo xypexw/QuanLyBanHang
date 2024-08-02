@@ -6,7 +6,6 @@
 #include <thread>
 #include <chrono>
 
-HangHoa* HangHoa::_pHead = NULL;
 Stack<string> HangHoa::_deletedIDs;
 
 int HangHoa::soHangHoa() {
@@ -81,26 +80,6 @@ void HangHoa::xoaHangHoa(string ma) {
     }
 }
 
-void HangHoa::timkiemhoanghoa() {
-    ifstream input("TiemKiemHangHoa.txt");
-    ofstream output("TiemKiemHangHoa.txt");
-    string tentimkiem;
-    input >> tentimkiem;
-    bool timthay = false;
-    for (HangHoa* hangcantim = _pHead; hangcantim != NULL; hangcantim = hangcantim->_pNext) {
-        if (hangcantim->_StrName == tentimkiem) {
-            output << hangcantim->_cMa << ", " << hangcantim->_StrName << ", " << hangcantim->_StrOrigin
-                << ", " << hangcantim->_strColor << ", " << hangcantim->_iPrice << ", "
-                << hangcantim->_strEntryDate << ", " << hangcantim->_iAmount << endl;
-            timthay = true;
-        }
-    }
-    if (!timthay) {
-        output << "Không tìm thấy hàng hóa." << endl;
-    }
-    input.close();
-    output.close();
-}
 
 void HangHoa::capNhatSoLuong(string ma, int soluong) {
     if (soluong <= 0) {
