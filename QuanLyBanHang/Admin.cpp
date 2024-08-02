@@ -175,11 +175,9 @@ void Admin::renderQuanLyHangHoa()
         Admin::renderXoaHangHoa();
     }
     if (iChoice == 3)
-        system("cls");
         Admin::renderCapNhatSoLuongHangHoa();
 
     if (iChoice == 4)
-        system("cls");
         Admind::renderMenuAdmin();
 }
 void Admin::renderMenuAdmin()

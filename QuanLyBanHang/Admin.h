@@ -25,5 +25,5 @@ public:
     void renderMenuAdmin();
     void renderTaoHangHoa();
     void renderXoaHangHoa();
-    void renderCapNhatSoLuong();
+    void renderCapNhatSoLuongHangHoa();
 };

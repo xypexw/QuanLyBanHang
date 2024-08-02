@@ -5,13 +5,13 @@ using namespace std;
 
 class HangHoa {
 private:
-    char ma[5]; //size + 1 cho null terminator
-    string name, origin, color, entryDate;
-    int price, amount;
-    HangHoa* next;
-    static HangHoa* head;
-    static int counter;
-    static Stack<string> deletedIDs;
+    char _cMa[5]; //size + 1 cho null terminator
+    string _StrName, _StrOrigin, _strColor, _strEntryDate;
+    int _iPrice, _iAmount;
+    HangHoa* _pNext;
+    static HangHoa* _pHead;
+    static int _iCounter;
+    static Stack<string> _deletedIDs;
 public:
     HangHoa(){}
     ~HangHoa(){}
