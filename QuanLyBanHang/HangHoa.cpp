@@ -11,7 +11,7 @@ void HangHoa::saveToFIle(){
         HangHoa* dummy = head;
         while(dummy != NULL){
             //ma, ten, noi sx, mau sac, gia ban, ngay nhap, so luong
-            file<<dummy->ma<<", "<<dummy->name<<", "<<dummy->origin<<", "<<dummy->color<<", "<<dummy->price<<", "<<dummy->entryDate<<", "<<dummy->amount<<endl;
+            file<<dummy->ma<<" "<<dummy->name<<" "<<dummy->origin<<" "<<dummy->color<<" "<<dummy->price<<" "<<dummy->entryDate<<" "<<dummy->amount<<endl;
             dummy = dummy->next;
         }
         file.close();

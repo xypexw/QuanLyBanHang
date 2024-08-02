@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "DonHang.h"
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -186,6 +187,9 @@ void UI::renderDatHang()
 		}
 	}
 	cout << endl;
+	DonHang a;
+	a.NhapThongTinDonHang();
+	a.LuuDonHang();
 	int iChoice;
 	cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << endl;
 	cout << "Choise: ";

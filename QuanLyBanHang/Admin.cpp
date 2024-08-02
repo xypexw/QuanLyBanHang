@@ -13,6 +13,7 @@
 #include "tools.h"
 #include "UI.h"
 #include "HangHoa.h"
+#include "DonHang.h"
 Admin::Admin(std::string strID, std::string strPassword) 
 {}
 
@@ -114,7 +115,21 @@ void Admin::renderXuLyDonHang()
             std::cout << strFileLine << std::endl;      //
         }                                               //
     }
+
     std::cout << std::endl;
+    DonHang a;
+    std::ifstream orderFile("DonHang.txt");
+    if (orderFile.is_open())
+    {
+        std::string orderInfo;
+        std::cout << "Nhung don dat hang: \n";
+        while (getline(orderFile, orderInfo))
+        {
+            std::cout << orderInfo << std::endl;
+        }
+        orderFile.close();
+    }
+    a.XuLyDonHang();
     int iChoice;
     std::cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << std::endl;
     std::cout << "Choise: ";
@@ -292,4 +307,4 @@ void Admin::renderXoaHangHoa()
     }
     else if (iChoice == 0)
         ui.renderGoodByeScreen();
-}
+} 

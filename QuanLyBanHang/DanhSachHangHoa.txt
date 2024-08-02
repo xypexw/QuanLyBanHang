@@ -1,2 +1,1 @@
-0002, Laptop, China, Red, 5000000, 27-07-2024, 5
-0003, Phone, Japan, Pink, 100000, 20-07-2024, 4
+0002 Laptop Korea Pink 10000 12-12-2012 1
