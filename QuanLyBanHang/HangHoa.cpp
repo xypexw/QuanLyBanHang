@@ -98,3 +98,24 @@ void HangHoa::xoaHangHoa(string ma){
         cout<<"Khong Tim Thay Hang Hoa";
     }
 }
+
+void HangHoa::timkiemhoanghoa() {
+    ifstream input("TiemKiemHangHoa.txt");
+    ofstream output("TiemKiemHangHoa.txt");
+    string tentimkiem;
+    input >> tentimkiem;
+    bool timthay = false;
+    for (HangHoa* hangcantim = head; hangcantim != NULL; hangcantim = hangcantim->next) {
+        if (hangcantim->name==tentimkiem) {
+            output << hangcantim->ma << ", " << hangcantim->name << ", " << hangcantim->origin
+                << ", " << hangcantim->color << ", " << hangcantim->price << ", " << hangcantim->entryDate << ", " << hangcantim->amount << endl;
+            timthay = true;
+        }
+    }
+    if (!timthay) {
+        output << "Không tìm thấy hàng hóa." << endl;
+    }
+    input.close();
+    output.close();
+}
+
