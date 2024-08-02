@@ -14,9 +14,10 @@ private:
     static Stack<string> deletedIDs;
 public:
     HangHoa(){}
-        ~HangHoa(){}
-        static void saveToFIle();
-        void taoHangHoa(string name, string origin, string color, int price, string entryDate, int amount);
-        static void xoaHangHoa(string ma);
-        void timkiemhoanghoa();
+    ~HangHoa(){}
+    static void saveToFIle();
+    void taoHangHoa(string name, string origin, string color, int price, string entryDate, int amount);
+    static void xoaHangHoa(string ma);
+    static void capNhatSoLuong(string ma, int soluong);
+    void timkiemhoanghoa();
 };

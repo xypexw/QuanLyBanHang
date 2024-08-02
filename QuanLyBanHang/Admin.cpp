@@ -175,7 +175,12 @@ void Admin::renderQuanLyHangHoa()
         Admin::renderXoaHangHoa();
     }
     if (iChoice == 3)
-        Admin::renderMenuAdmin();
+        system("cls");
+        Admin::renderCapNhatSoLuongHangHoa();
+
+    if (iChoice == 4)
+        system("cls");
+        Admind::renderMenuAdmin();
 }
 void Admin::renderMenuAdmin()
 {
@@ -308,3 +313,31 @@ void Admin::renderXoaHangHoa()
     else if (iChoice == 0)
         ui.renderGoodByeScreen();
 } 
+
+void Admin::renderCapNhatSoLuongHangHoa(){
+    UI ui;
+    system("cls");                                      
+    getDefaultAttribute();                              
+    std::ifstream iFileOpen;                            
+    iFileOpen.open("CapNhatSoLuongHangHoa.txt", std::ios::in);    
+    alignTextPositionHeight(20);                        
+    textColor(14);                                      
+    if (iFileOpen.is_open())                            
+    {                                                   
+        textColor(14);                                  
+        std::string strFileLine;                        
+        while (getline(iFileOpen, strFileLine))         
+        {                                               
+            alignTextPositionWidth(strFileLine, 2);     
+            std::cout << strFileLine << std::endl;      
+        }                                               
+    }
+    cout << endl;
+    string ma, int soluong;
+    cout << "Nhap so ma hang hoa can cap nhat: ";
+    cin.ignore();
+    getline(cin,ma);
+    cout << "Nhap so luong: ";
+    cin >> soluong;
+    HangHoa::capNhatSoLuong(ma,soluong);
+}

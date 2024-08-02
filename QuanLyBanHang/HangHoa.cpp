@@ -3,99 +3,103 @@
 #include <cstdio>
 #include <cstring>
 #include "Stack.h"
-#include <thread> 
+#include <thread>
 #include <chrono>
-void HangHoa::saveToFIle(){
-    std::ofstream file("DanhSachHangHoa.txt",std::ios::out);
-    if(file.is_open()){
-        HangHoa* dummy = head;
-        while(dummy != NULL){
-            //ma, ten, noi sx, mau sac, gia ban, ngay nhap, so luong
-            file<<dummy->ma<<" "<<dummy->name<<" "<<dummy->origin<<" "<<dummy->color<<" "<<dummy->price<<" "<<dummy->entryDate<<" "<<dummy->amount<<endl;
-            dummy = dummy->next;
+
+void HangHoa::saveToFIle() {
+    ofstream file("DanhSachHangHoa.txt", ios::out);
+    if (file.is_open()) {
+        HangHoa* dummy = _pHead;
+        while (dummy != NULL) {
+            // ma, ten, noi sx, mau sac, gia ban, ngay nhap, so luong
+            file << dummy->_cMa << " " << dummy->_StrName << " " << dummy->_StrOrigin << " " 
+                 << dummy->_strColor << " " << dummy->_iPrice << " " << dummy->_strEntryDate << " " 
+                 << dummy->_iAmount << endl;
+            dummy = dummy->_pNext;
         }
         file.close();
-    }else {
-        std::cerr << "Failed to open file";
+    } else {
+        cerr << "Failed to open file";
     }
 }
 
-int HangHoa::counter = 1;
-HangHoa* HangHoa::head = NULL;
-Stack<string> HangHoa::deletedIDs;
-void HangHoa::taoHangHoa(string name, string origin, string color, int price, string entryDate, int amount){
+int HangHoa::_iCounter = 1;
+HangHoa* HangHoa::_pHead = NULL;
+Stack<string> HangHoa::_deletedIDs;
+
+void HangHoa::taoHangHoa(string name, string origin, string color, int price, string entryDate, int amount) {
     HangHoa* newNode = new HangHoa();
-    newNode->name = name;
-    newNode->origin = origin;
-    newNode->color = color;
-    newNode->price = price;
-    newNode->entryDate = entryDate;
-    newNode->amount = amount;
-    newNode->next = NULL;       
-    if(head == NULL){
-        head = newNode;
-        if(!deletedIDs.isEmpty()){
-            string id = deletedIDs.pop();
-            strncpy_s(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
-            newNode->ma[sizeof(newNode->ma) - 1] = '\0';
-        }else{
-            snprintf(newNode->ma, sizeof(newNode->ma), "%04d", counter++);
+    newNode->_StrName = name;
+    newNode->_StrOrigin = origin;
+    newNode->_strColor = color;
+    newNode->_iPrice = price;
+    newNode->_strEntryDate = entryDate;
+    newNode->_iAmount = amount;
+    newNode->_pNext = NULL;       
+
+    if (_pHead == NULL) {
+        _pHead = newNode;
+        if (!_deletedIDs.isEmpty()) {
+            string id = _deletedIDs.pop();
+            strncpy_s(newNode->_cMa, id.c_str(), sizeof(newNode->_cMa) - 1);
+            newNode->_cMa[sizeof(newNode->_cMa) - 1] = '\0';
+        } else {
+            snprintf(newNode->_cMa, sizeof(newNode->_cMa), "%04d", _iCounter++);
         }
-    }else{
-        HangHoa* tmp = head;
+    } else {
+        HangHoa* tmp = _pHead;
         bool flag = false;
-        while(tmp != NULL){
-            if(newNode->name == tmp->name && newNode->origin == tmp->origin && newNode->color == tmp->color && newNode->entryDate == tmp->entryDate){
-                tmp->amount += newNode->amount;
+        while (tmp != NULL) {
+            if (newNode->_StrName == tmp->_StrName && newNode->_StrOrigin == tmp->_StrOrigin 
+                && newNode->_strColor == tmp->_strColor && newNode->_strEntryDate == tmp->_strEntryDate) {
+                tmp->_iAmount += newNode->_iAmount;
                 delete newNode;
                 flag = true;
                 break;
             }
-            if(tmp->next == NULL){
+            if (tmp->_pNext == NULL) {
                 break;
             }
-            tmp = tmp->next;
+            tmp = tmp->_pNext;
         }
-            if(!flag){
-                tmp->next = newNode;
-                if(!deletedIDs.isEmpty()){
-                    string id = deletedIDs.pop();
-                    strncpy_s(newNode->ma, id.c_str(), sizeof(newNode->ma) - 1);
-                    newNode->ma[sizeof(newNode->ma) - 1] = '\0';
-                }else{
-                    snprintf(newNode->ma, sizeof(newNode->ma), "%04d", counter++);
-                }
+        if (!flag) {
+            tmp->_pNext = newNode;
+            if (!_deletedIDs.isEmpty()) {
+                string id = _deletedIDs.pop();
+                strncpy_s(newNode->_cMa, id.c_str(), sizeof(newNode->_cMa) - 1);
+                newNode->_cMa[sizeof(newNode->_cMa) - 1] = '\0';
+            } else {
+                snprintf(newNode->_cMa, sizeof(newNode->_cMa), "%04d", _iCounter++);
             }
+        }
     }
     HangHoa::saveToFIle();
 }    
 
-void HangHoa::xoaHangHoa(string ma){
-    HangHoa *tmp = head;
+void HangHoa::xoaHangHoa(string ma) {
+    HangHoa *tmp = _pHead;
     HangHoa* prev = NULL;
     bool found = false;
-    while(tmp != NULL){
-        if(ma == tmp->ma){
+    while (tmp != NULL) {
+        if (ma == tmp->_cMa) {
             found = true;
-            if(prev == NULL){
-                head = tmp->next;
-            }else{
-                prev->next = tmp->next;
+            if (prev == NULL) {
+                _pHead = tmp->_pNext;
+            } else {
+                prev->_pNext = tmp->_pNext;
             }
             break;
         }
         prev = tmp;
-        tmp = tmp->next;
+        tmp = tmp->_pNext;
     }
-    if(found){
-       deletedIDs.push(tmp->ma);
+    if (found) {
+       _deletedIDs.push(tmp->_cMa);
        delete tmp;
        HangHoa::saveToFIle();
        cout << "Xoa Hang Hoa Thanh Cong";
-    }
-    else
-    {
-        cout<<"Khong Tim Thay Hang Hoa";
+    } else {
+        cout << "Khong Tim Thay Hang Hoa";
     }
 }
 
@@ -105,10 +109,11 @@ void HangHoa::timkiemhoanghoa() {
     string tentimkiem;
     input >> tentimkiem;
     bool timthay = false;
-    for (HangHoa* hangcantim = head; hangcantim != NULL; hangcantim = hangcantim->next) {
-        if (hangcantim->name==tentimkiem) {
-            output << hangcantim->ma << ", " << hangcantim->name << ", " << hangcantim->origin
-                << ", " << hangcantim->color << ", " << hangcantim->price << ", " << hangcantim->entryDate << ", " << hangcantim->amount << endl;
+    for (HangHoa* hangcantim = _pHead; hangcantim != NULL; hangcantim = hangcantim->_pNext) {
+        if (hangcantim->_StrName == tentimkiem) {
+            output << hangcantim->_cMa << ", " << hangcantim->_StrName << ", " << hangcantim->_StrOrigin
+                << ", " << hangcantim->_strColor << ", " << hangcantim->_iPrice << ", " 
+                << hangcantim->_strEntryDate << ", " << hangcantim->_iAmount << endl;
             timthay = true;
         }
     }
@@ -119,3 +124,24 @@ void HangHoa::timkiemhoanghoa() {
     output.close();
 }
 
+void HangHoa::capNhatSoLuong(string ma, int soluong) {
+    HangHoa* tmp = _pHead;
+    if (tmp == NULL) {
+        cout << "Danh sach hang hoa dang trong!" << endl;
+    } else {
+        bool found = false;
+        while (tmp != NULL) {
+            if (tmp->_cMa == ma) {
+                found = true;
+                tmp->_iAmount = soluong;
+                HangHoa::saveToFIle();
+                cout << "Cap nhat so luong thanh cong" << endl;
+                break;
+            }
+            tmp = tmp->_pNext;
+        }
+        if (!found) {
+            cout << "Ma hang hoa khong co trong danh sach hang hoa" << endl;
+        }
+    }
+}
