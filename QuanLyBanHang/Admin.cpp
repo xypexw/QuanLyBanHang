@@ -178,7 +178,7 @@ void Admin::renderQuanLyHangHoa()
         Admin::renderCapNhatSoLuongHangHoa();
 
     if (iChoice == 4)
-        Admind::renderMenuAdmin();
+        Admin::renderMenuAdmin();
 }
 void Admin::renderMenuAdmin()
 {
@@ -331,7 +331,8 @@ void Admin::renderCapNhatSoLuongHangHoa(){
         }                                               
     }
     cout << endl;
-    string ma, int soluong;
+    string ma;
+     int soluong;
     cout << "Nhap so ma hang hoa can cap nhat: ";
     cin.ignore();
     getline(cin,ma);
