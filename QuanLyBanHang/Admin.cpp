@@ -48,10 +48,10 @@ bool Admin::login()
     UI ui;
     bool bCheck = false;
     std::ifstream ifAdminFile;
-    ifAdminFile.open("admin.txt", std::ios::in);
     int iCount = 0;
     while (iCount < 3)
     {
+        ifAdminFile.open("admin.txt", std::ios::in);
         std::string strID;
         std::cout << "Enter ID: ";
         getline(std::cin, strID);
@@ -76,6 +76,7 @@ bool Admin::login()
                     bCheck = true;
                 }
             }
+            ifAdminFile.close();
         }
         if (bCheck)
         {
