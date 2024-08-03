@@ -140,7 +140,7 @@ void DonHang::NhapThongTinDonHang()
     std::cout << "Nhap quoc gia: ";
     std::cin >> Country;
     std::cin.ignore(); // Bỏ qua ký tự newline còn lại trong bộ đệm
-    std::cout << "Nhap ten khach hang: ";
+    std::cout << "Nhap ten khach hang: "; 
     std::getline(std::cin, customerName);
     std::cout << "Nhap dia chi khach hang: ";
     std::getline(std::cin, customerAddress);
