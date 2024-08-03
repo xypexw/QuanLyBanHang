@@ -340,4 +340,16 @@ void Admin::renderCapNhatSoLuongHangHoa(){
     cout << "Nhap so luong: ";
     cin >> soluong;
     HangHoa::capNhatSoLuong(ma,soluong);
+    int iChoice;
+    std::cout << std::endl;
+    std::cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << std::endl;
+    std::cout << "Choise: ";
+    std::cin >> iChoice;
+    if (iChoice == 1)
+    {
+        system("cls");
+        Admin::renderQuanLyHangHoa();
+    }
+    else if (iChoice == 0)
+        ui.renderGoodByeScreen();
 }
