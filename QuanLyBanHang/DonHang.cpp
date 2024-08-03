@@ -52,56 +52,58 @@ bool DonHang::KiemTraHangHoa(std::string productCodes)
 // Hàm đặt hàng
 void DonHang::DatHang(std::string productCodes, int quantity, std::string Color, std::string Country, const std::string &customerName, const std::string &customerAddress, const std::string &phoneNumber, const std::string &orderDate)
 {
-    // Kiểm tra xem có đơn hàng nào có thông tin giống nhau hay không
-        // Tạo đơn hàng mới
-        if (!KiemTraHangHoa(productCodes))
-        {
-            std::cerr << "Hết hàng!" << std::endl;
-            return;
-        }
-        Order *newOrder = new Order;
-        newOrder->productCodes = productCodes;
-        newOrder->quantity = quantity;
-        newOrder->Color = Color;
-        newOrder->Country = Country;
-        newOrder->customerName = customerName;
-        newOrder->customerAddress = customerAddress;
-        newOrder->phoneNumber = phoneNumber;
-        newOrder->orderDate = orderDate;
-        newOrder->next = nullptr;
+    // Tạo đơn hàng mới
+    if (!KiemTraHangHoa(productCodes))
+    {
+        std::cerr << "Hết hàng!" << std::endl;
+        return;
+    }
+    Order *newOrder = new Order;
+    newOrder->productCodes = productCodes;
+    newOrder->quantity = quantity;
+    newOrder->Color = Color;
+    newOrder->Country = Country;
+    newOrder->customerName = customerName;
+    newOrder->customerAddress = customerAddress;
+    newOrder->phoneNumber = phoneNumber;
+    newOrder->orderDate = orderDate;
+    newOrder->next = nullptr;
 
-        // Định dạng orderNumber và lưu vào orderNumberStr
-        snprintf(newOrder->orderNumberStr, sizeof(newOrder->orderNumberStr), "%04d", Order::orderNumber++);
-        newOrder->orderNumber = Order::orderNumber;
+    // Định dạng orderNumber và lưu vào orderNumberStr
+    snprintf(newOrder->orderNumberStr, sizeof(newOrder->orderNumberStr), "%04d", Order::orderNumber++);
+    newOrder->orderNumber = Order::orderNumber;
 
-        // Thêm đơn hàng mới vào danh sách liên kết
-        if (head == nullptr)
+    // Thêm đơn hàng mới vào danh sách liên kết
+    if (head == nullptr)
+    {
+        head = newOrder;
+    }
+    else
+    {
+        Order *temp = head;
+        while (temp->next != nullptr)
         {
-            head = newOrder;
+            temp = temp->next;
         }
-        else
-        {
-            Order *temp = head;
-            while (temp->next != nullptr)
-            {
-                temp = temp->next;
-            }
-            temp->next = newOrder;
-        }
-        orderCount++;
-        std::cout << "Don Hang Dang Cho Xu Ly.\n";
+        temp->next = newOrder;
+    }
+    orderCount++;
+    std::cout << "Don Hang Dang Cho Xu Ly.\n";
 }
 
 // Hàm lưu đơn hàng vào file
-void DonHang::LuuDonHang() {
-    std::ofstream outFile("DonHang.txt" , std::ios::app);
-    if (!outFile) {
+void DonHang::LuuDonHang()
+{
+    std::ofstream outFile("DonHang.txt", std::ios::app);
+    if (!outFile)
+    {
         std::cerr << "Không thể mở file để ghi!" << std::endl;
         return;
     }
-    
-    Order* current = head;
-    while (current != nullptr) {
+
+    Order *current = head;
+    while (current != nullptr)
+    {
         outFile << current->orderNumberStr;
         outFile << " " << current->productCodes;
         outFile << " " << current->quantity;
@@ -115,7 +117,6 @@ void DonHang::LuuDonHang() {
     }
 
     outFile.close();
-
 }
 
 // Hàm nhập thông tin đơn hàng từ người dùng
@@ -176,7 +177,8 @@ void DonHang::CapNhatSoLuongHangHoa(std::string productCodes, int quantityChange
         {
             quantity += quantityChange;
         }
-        if (quantity) tempFile << orderNumber << " " << code << " " << country << " " << color << " " << totalamount << " " << date << " " << quantity << "\n";
+        if (quantity)
+            tempFile << orderNumber << " " << code << " " << country << " " << color << " " << totalamount << " " << date << " " << quantity << "\n";
     }
 
     inFile.close();
@@ -252,15 +254,35 @@ void DonHang::XuLyDonHang()
 
     Order *current = head;
     Order *previous = nullptr;
-
+    std::cout << "Xu ly don hang: 0001 " << std::endl;
     while (current != nullptr)
     {
         // Xu ly don hang o day
         // Vi du: Hien thi thong tin don hang
-        std::cout << "Xu ly don hang: " << current->orderNumberStr << std::endl;
-
         // Cap nhat so luong hang hoa trong file DanhSachHangHoa.txt
-        CapNhatSoLuongHangHoa(current->productCodes, -current->quantity);
+        if (strcmp(current->orderNumberStr, "0001") == 0)
+        {
+            CapNhatSoLuongHangHoa(current->productCodes, -current->quantity);
+        }
+        else
+        {
+            std::ofstream outFile("TempDonHang.txt", std::ios::app);
+            int orderNumber = std::stoi(current->orderNumberStr);
+            orderNumber--;
+            snprintf(current->orderNumberStr, sizeof(current->orderNumberStr), "%04d", orderNumber);
+            current->orderNumber = orderNumber;
+            outFile << current->orderNumberStr;
+            outFile << " " << current->productCodes;
+            outFile << " " << current->quantity;    
+            outFile << " " << current->Color;
+            outFile << " " << current->Country;
+            outFile << " " << current->customerName;
+            outFile << " " << current->customerAddress;
+            outFile << " " << current->phoneNumber;
+            outFile << " " << current->orderDate << "\n";
+
+            outFile.close();
+        }
 
         // Doc don hang tiep theo
         previous = current;
@@ -271,6 +293,21 @@ void DonHang::XuLyDonHang()
     }
 
     // Doi ten file tam thanh ten file goc
-    std::rename("TempDanhSachHangHoa.txt", "DanhSachHangHoa.txt");
-    std::ofstream tempFileClear("DonHang.txt", std::ios::trunc);
+    //std::rename("TempDanhSachHangHoa.txt", "DanhSachHangHoa.txt");
+    // Xoa thong tin trong file "DanhSachHangHoa.txt"
+    std::ofstream danhSachHangHoaFile("DonHang.txt", std::ios::trunc);
+
+    // Copy du lieu tu "TempDanhSachHangHoa.txt" vao "DanhSachHangHoa.txt"
+    std::ifstream tempFileRead("TempDonHang.txt");
+    while (std::getline(tempFileRead, line))
+    {
+        danhSachHangHoaFile << line << "\n";
+    }
+
+    tempFileRead.close();
+    danhSachHangHoaFile.close();
+
+    // Xoa du lieu trong "TempDanhSachHangHoa.txt"
+    std::ofstream tempFileClear("TempDonHang.txt", std::ios::trunc);
+    // xóa thông tin trong DonHang.txt
 }

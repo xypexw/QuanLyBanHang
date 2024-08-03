@@ -332,7 +332,7 @@ void Admin::renderCapNhatSoLuongHangHoa(){
     }
     cout << endl;
     string ma;
-     int soluong;
+    int soluong;
     cout << "Nhap so ma hang hoa can cap nhat: ";
     cin.ignore();
     getline(cin,ma);

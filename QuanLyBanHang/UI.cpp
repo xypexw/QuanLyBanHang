@@ -190,6 +190,18 @@ void UI::renderDatHang()
 	DonHang a;
 	a.NhapThongTinDonHang();
 	a.LuuDonHang();
+	string choice;
+	while(true){
+		cout << "Ban muon dat hang tiep hong ne: \n" ;
+		cout << "Neu muon thi go yes khong la no: ";
+		cin >> choice ;
+		if ( choice == "yes" ) {
+			Order::orderNumber--;
+			a.NhapThongTinDonHang();
+			a.LuuDonHang();
+		}
+		else break;
+	}
 	int iChoice;
 	cout << "Do you want go back to main menu ? press 1 for yes, 0 for no" << endl;
 	cout << "Choise: ";

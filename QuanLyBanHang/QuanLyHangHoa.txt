@@ -3,4 +3,5 @@
 ***********************************
 1.Tao hang hoa
 2.Xoa hang hoa 
-3.Tro ve
+3.Cap nhat so luong
+4.Tro ve
