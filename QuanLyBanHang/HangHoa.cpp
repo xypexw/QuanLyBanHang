@@ -127,3 +127,57 @@ void HangHoa::capNhatSoLuong(string ma, int soluong) {
         cout << "Ma hang hoa khong co trong danh sach hang hoa" << endl;
     }
 }
+
+void HangHoa::timkiemhoanghoa() {
+    ifstream input("TiemKiemHangHoa.txt");
+    ofstream output("TiemKiemHangHoa.txt");
+    string tentimkiem;
+    if (!input || !output) {
+        cerr << "Không thể mở file!" << endl;
+        return;
+    }
+    input >> tentimkiem;
+    bool timthay = false;
+
+    HangHoa* hangcantim = head;
+    while (hangcantim != NULL) {
+        if (hangcantim->name == tentimkiem) {
+            timthay = true;
+            break;
+        }
+        hangcantim = hangcantim->next;
+    }
+
+    if (!timthay) {
+        output << "Không tìm thấy hàng hóa." << endl;
+    }
+    else {
+        int dorongcuama = 10;
+        int dorongcuaten = 20;
+        int dorongcuaorigin = 20;
+        int dorongcuacolor = 10;
+        int dorongcuaentrydate = 15;
+        output << std::left << std::setw(dorongcuama) << "Ma"
+            << std::left << std::setw(dorongcuaten) << "Name"
+            << std::left << std::setw(dorongcuaorigin) << "Origin"
+            << std::left << std::setw(dorongcuacolor) << "Color"
+            << std::left << std::setw(dorongcuaentrydate) << "EntryDate"
+            << std::endl;
+
+        output << std::setfill('-') << std::setw(dorongcuama) << ""
+            << std::setw(dorongcuaten) << ""
+            << std::setw(dorongcuaorigin) << ""
+            << std::setw(dorongcuacolor) << ""
+            << std::setw(dorongcuaentrydate) << ""
+            << std::setfill(' ') << std::endl;
+
+        output << std::left << std::setw(dorongcuama) << hangcantim->ma
+            << std::left << std::setw(dorongcuaten) << hangcantim->name
+            << std::left << std::setw(dorongcuaorigin) << hangcantim->origin
+            << std::left << std::setw(dorongcuacolor) << hangcantim->color
+            << std::left << std::setw(dorongcuaentrydate) << hangcantim->entryDate
+            << std::endl;
+    }
+    input.close();
+    output.close();
+}
